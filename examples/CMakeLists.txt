@@ -1,1 +1,1 @@
-add_subdirectory(hm01b0-library-for-pico-main)
+add_subdirectory(WIZnet_Video_Streaming_HM01B0)
