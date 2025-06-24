@@ -116,7 +116,7 @@ int hm01b0_init(const struct hm01b0_config* config)
     gpio_pull_up(config->sda_pin);
     gpio_pull_up(config->scl_pin);
 
-    i2c_init(config->i2c, 100 * 1000);
+    i2c_init(config->i2c, 400 * 1000);
 
     uint16_t model_id = hm01b0_read_reg16(0x0000);
     if (model_id != 0x01b0) {

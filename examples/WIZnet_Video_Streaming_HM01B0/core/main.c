@@ -18,7 +18,6 @@
 #include "socket.h"
 
 #include "pico/time.h"
-#include "usb_descriptors.h"
 #include "pico/hm01b0.h"
 
 
@@ -41,6 +40,9 @@
 #else
   #error "you must define USE_FRAME_320X240 or USE_FRAME_160X120"
 #endif
+#ifndef FRAME_RATE
+#define FRAME_RATE    30
+#endif
 
 #define HEADER_SIZE 4         
 #define DATA_BUF_SIZE 2048
@@ -54,6 +56,7 @@
     #define SOCK_MODE Sn_MR_UDP
     #define SOCK_FLAG 0
 #endif
+
 
 /* Clock */
 #define PLL_SYS_KHZ (133 * 1000)
@@ -305,7 +308,6 @@ int32_t video_streaming_udps(uint8_t sn, uint8_t *buf, uint16_t port)
                 if (ret < 0) return ret;
             }
             //delay to control frame rate
-            sleep_ms(1);
         }
         break;
 
@@ -330,9 +332,6 @@ static void fill_camera_frame(uint8_t *buffer)
 
   // Read frame from camera
   hm01b0_read_frame(monochrome_buffer, sizeof(monochrome_buffer));
-    printf("Frame sample: %02X %02X %02X %02X\n", 
-        monochrome_buffer[0], monochrome_buffer[1], 
-        monochrome_buffer[2], monochrome_buffer[3]);
   // Copy monochrome frame data to frame buffer as Y value,
   // set U and V values with a fixed value of 128.
   for (int y = 0; y < FRAME_HEIGHT; y++) {
