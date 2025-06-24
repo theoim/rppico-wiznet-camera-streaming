@@ -127,7 +127,7 @@ Before running the **WIZnet Stream Viewer**, make sure to install the required P
 | VSYNC      | 6    |
 | HSYNC      | 7    |
 | PCLK       | 8    |
-| DATA0~7    | 9~16 |
+| DATA0~7    | 9    |
 | I2C SDA    | 4    |
 | I2C SCL    | 5    |
 | VCC        | 3.3V |
