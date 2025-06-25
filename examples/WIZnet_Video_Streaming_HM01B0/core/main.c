@@ -27,8 +27,8 @@
  * ----------------------------------------------------------------------------------------------------
  */
 // select the camera resolution (default is 160x120)
-#define USE_FRAME_320X240
-// #define USE_FRAME_160X120
+// #define USE_FRAME_320X240
+#define USE_FRAME_160X120
 
 // 해상도 정의
 #if defined(USE_FRAME_320X240)
@@ -62,13 +62,13 @@
 #define PLL_SYS_KHZ (133 * 1000)
 
 /* Buffer */
-#define ETHERNET_BUF_SIZE (1024 * 2)
+#define ETHERNET_BUF_SIZE (32 * 2)
 
 /* Socket */
-#define SOCKET_LOOPBACK 0
+#define SOCK_STREAM 0
 
 /* Port */
-#define PORT_LOOPBACK 5000
+#define PORT_STREAM 5000
 /**
  * ----------------------------------------------------------------------------------------------------
  * Variables
@@ -109,7 +109,7 @@ static wiz_NetInfo g_net_info =
 #endif
 };
 
-/* Loopback */
+/* Buffer for Recv Command(START/STOP) */
 static uint8_t g_ethernet_buf[ETHERNET_BUF_SIZE] = {
     0,
 };
@@ -217,7 +217,7 @@ int main()
     /* Infinite loop */
     while (1)
     {  
-     video_streaming_udps(SOCKET_LOOPBACK, g_ethernet_buf, PORT_LOOPBACK);
+     video_streaming_udps(SOCK_STREAM, g_ethernet_buf, PORT_STREAM);
     }
 }
 
